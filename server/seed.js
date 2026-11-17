@@ -211,20 +211,42 @@ export function seedDemo() {
   });
 }
 
+const LEGACY_ADMIN_EMAIL = 'admin@pepefit.app';
+
 export function seedAdmin() {
-  const email = 'admin@pepefit.app';
-  const existing = get('SELECT id FROM users WHERE email = ?', email);
-  if (existing) {
-    run('UPDATE users SET is_admin = 1 WHERE id = ?', existing.id);
+  const email = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
+  const password = process.env.ADMIN_PASSWORD || '';
+
+  if (!email || !password) {
+    const anyAdmin = get('SELECT id FROM users WHERE is_admin = 1');
+    if (!anyAdmin) console.warn('[admin] No admin login configured — set ADMIN_EMAIL and ADMIN_PASSWORD in .env.');
     return;
   }
-  const password_hash = bcrypt.hashSync('admin12345', 10);
+  if (password.length < 8) {
+    console.warn('[admin] ADMIN_PASSWORD must be at least 8 characters — admin login left unchanged.');
+    return;
+  }
+
+  // Earlier builds shipped a fixed admin login. Once a real one is configured, retire its admin rights.
+  if (email !== LEGACY_ADMIN_EMAIL) {
+    run('UPDATE users SET is_admin = 0 WHERE lower(email) = ?', LEGACY_ADMIN_EMAIL);
+  }
+
+  const password_hash = bcrypt.hashSync(password, 10);
+  const existing = get('SELECT id FROM users WHERE lower(email) = ?', email);
+  if (existing) {
+    run('UPDATE users SET password_hash = ?, is_admin = 1 WHERE id = ?', password_hash, existing.id);
+    console.log(`[admin] ${email} can sign in as admin`);
+    return;
+  }
+
   const userId = Number(run('INSERT INTO users (email, password_hash, name, avatar_color, onboarded, is_admin) VALUES (?, ?, ?, ?, 1, 1)',
     email, password_hash, 'Pepefit Admin', 'volt').lastInsertRowid);
   run(`INSERT INTO profiles (user_id, age, sex, height_cm, weight_kg, experience, goal, weekly_frequency, diet, restrictions, activity_level, unit_system)
     VALUES (?, 32, 'male', 180, 78, 'advanced', 'strength', 4, ?, ?, 'moderate', 'metric')`,
     userId, JSON.stringify(['High protein', 'Balanced']), JSON.stringify([]));
   run('INSERT INTO targets (user_id, calories, protein, carbs, fat, fiber, sodium) VALUES (?, 2500, 180, 260, 75, 32, 2300)', userId);
+  console.log(`[admin] created admin account ${email}`);
 }
 
 export function seedDatabase() {

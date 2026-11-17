@@ -27,6 +27,12 @@ npm run seed   # creates the database and demo account
 npm run dev    # API on :4000, web on :5173
 ```
 
+### Admin access
+
+The admin login is not hardcoded. Copy `.env.example` to `.env` and set `ADMIN_EMAIL` and `ADMIN_PASSWORD`;
+the server creates that account on first start and updates its password on every restart, so the env file
+is the single source of truth. Admins get a read-only account overview at `/admin`.
+
 Open http://localhost:5173 and sign in with the demo account:
 
 - **Email:** `demo@pepefit.app`

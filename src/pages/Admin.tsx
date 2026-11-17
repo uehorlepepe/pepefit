@@ -80,8 +80,8 @@ export function Admin() {
                   {account.name}
                   {account.isAdmin && <span className="pill pill-volt">admin</span>}
                 </b>
-                <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{account.email}</span>
-                <span className="tiny faint">
+                <span style={{ display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{account.email}</span>
+                <span className="tiny faint" style={{ display: 'block', marginTop: 2 }}>
                   {formatNumber(account.workouts)} workouts · {formatNumber(account.meals)} meals logged
                   {account.lastWorkout ? ` · last ${formatDate(account.lastWorkout.slice(0, 10))}` : ' · never trained'}
                 </span>
