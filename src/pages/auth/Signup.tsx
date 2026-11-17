@@ -39,8 +39,8 @@ export function Signup() {
 
   return (
     <AuthFrame
-      title={<>Start your<br /><em>next chapter.</em></>}
-      subtitle="Two minutes of setup. A training and nutrition hub built around you."
+      title={<>Create your<br /><em>account.</em></>}
+      subtitle="Two minutes of setup, then training and food live in one place."
       footer={<>Already have an account? <Link to="/login">Sign in</Link></>}
     >
       <form className="auth-form" onSubmit={submit} noValidate>
@@ -70,7 +70,7 @@ export function Signup() {
           {loading ? <span className="spinner" /> : <>Create account <ArrowRight size={16} /></>}
         </button>
         <div className="row tiny faint" style={{ justifyContent: 'center', gap: 5, marginTop: -2 }}>
-          <Check size={11} /> Your data stays on your device. No ads, ever.
+          <Check size={11} /> No ads, no upsells, nothing sold.
         </div>
       </form>
       <Link to="/login" className="back-link" style={{ marginTop: 20 }}><ArrowLeft size={13} /> Back to sign in</Link>

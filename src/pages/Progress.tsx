@@ -108,8 +108,7 @@ export function Progress() {
       <button className="back-link" onClick={() => navigate(-1)}><ArrowLeft size={14} /> Back</button>
       <div className="page-head" style={{ marginTop: 14 }}>
         <div>
-          <span className="eyebrow">The long game</span>
-          <h1>Progress<span style={{ color: 'var(--volt)' }}>.</span></h1>
+          <h1>Progress</h1>
         </div>
         <div className="range-tabs" style={{ marginTop: 4 }}>
           {[30, 90, 365].map(d => (
@@ -121,7 +120,7 @@ export function Progress() {
       <div className="card" style={{ background: 'var(--surface)' }}>
         <div className="row-between" style={{ alignItems: 'flex-start' }}>
           <div>
-            <div className="card-title"><Scale size={13} style={{ color: 'var(--volt)' }} /> WEIGHT</div>
+            <div className="card-title"><Scale size={13} style={{ color: 'var(--accent)' }} /> Weight</div>
             <div className="row" style={{ gap: 8, alignItems: 'baseline', marginTop: 5 }}>
               <span className="num" style={{ fontSize: 38 }}>{stats.currentWeight ?? '—'}</span>
               <span className="small faint">kg</span>
@@ -138,7 +137,7 @@ export function Progress() {
           {data.weights.length > 1 ? (
             <TrendChart
               data={data.weights.map(w => ({ label: formatDate(w.date), value: w.weight }))}
-              color="var(--volt)"
+              color="var(--accent)"
               height={150}
               unit=" kg"
               formatValue={v => v.toFixed(1)}
@@ -204,11 +203,11 @@ export function Progress() {
         </div>
       </div>
 
-      <SectionHead title="Fuel average" action="30 days" />
+      <SectionHead title="Nutrition average" action="30 days" />
       <div className="card">
         <div className="row-between">
           <div>
-            <div className="card-title"><Utensils size={13} style={{ color: 'var(--amber)' }} /> NUTRITION</div>
+            <div className="card-title"><Utensils size={13} style={{ color: 'var(--amber)' }} /> Nutrition</div>
             <div className="row" style={{ gap: 8, alignItems: 'baseline', marginTop: 5 }}>
               <span className="num" style={{ fontSize: 30 }}>{formatNumber(stats.avgCalories)}</span>
               <span className="small faint">kcal / logged day</span>
@@ -254,7 +253,7 @@ export function Progress() {
 
       <div className="grid-2 mt-14">
         <button className="card card-press" style={{ textAlign: 'left', padding: 15 }} onClick={() => navigate('/workout')}>
-          <Dumbbell size={17} style={{ color: 'var(--volt)' }} />
+          <Dumbbell size={17} style={{ color: 'var(--accent)' }} />
           <b style={{ display: 'block', fontSize: 12.5, marginTop: 9 }}>Workout history</b>
           <span className="tiny faint">Sessions, sets & volume</span>
         </button>

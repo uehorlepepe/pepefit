@@ -215,8 +215,7 @@ export function Nutrition() {
     <div className="page">
       <div className="page-head">
         <div>
-          <span className="eyebrow">Fuel with intent</span>
-          <h1>Nutrition<span style={{ color: 'var(--volt)' }}>.</span></h1>
+          <h1>Nutrition</h1>
         </div>
         <button className="btn-circle" onClick={openTargets} aria-label="Edit nutrition targets" style={{ marginTop: 4 }}>
           <SlidersHorizontal size={16} />
@@ -238,7 +237,7 @@ export function Nutrition() {
               <span className="dn" style={{ position: 'relative' }}>
                 {Number(d.slice(-2))}
                 {d !== date && (w?.calories || 0) > 0 && (
-                  <i style={{ position: 'absolute', bottom: -3, width: 3, height: 3, borderRadius: 99, background: 'var(--volt)' }} />
+                  <i style={{ position: 'absolute', bottom: -3, width: 3, height: 3, borderRadius: 99, background: 'var(--accent)' }} />
                 )}
               </span>
             </button>
@@ -256,23 +255,23 @@ export function Nutrition() {
 
       <div className="card nutrition-hero">
         <div className="row-between" style={{ marginBottom: 14 }}>
-          <div className="card-title"><Flame size={13} style={{ color: 'var(--accent)' }} /> DAILY ENERGY</div>
+          <div className="card-title"><Flame size={13} style={{ color: 'var(--accent)' }} /> Today's food</div>
           <span className={`pill ${remaining < 0 ? 'pill-amber' : 'pill-volt'}`}>{remaining < 0 ? `${Math.abs(remaining)} over` : `${remaining} left`}</span>
         </div>
         <div className="hero-main" style={{ gap: 18 }}>
           <div style={{ position: 'relative', width: 136, height: 136, flexShrink: 0 }}>
             <svg width="136" height="136" viewBox="0 0 136 136" style={{ transform: 'rotate(-90deg)' }}>
-              <circle cx="68" cy="68" r="60" fill="none" stroke="rgba(255,255,255,.07)" strokeWidth="10" />
+              <circle cx="68" cy="68" r="60" fill="none" stroke="var(--ring-track)" strokeWidth="10" />
               <circle
-                cx="68" cy="68" r="60" fill="none" stroke={remaining < 0 ? 'var(--amber)' : 'url(#nutri-grad)'} strokeWidth="10"
+                cx="68" cy="68" r="60" fill="none" stroke={remaining < 0 ? 'var(--amber)' : 'var(--accent)'} strokeWidth="10"
                 strokeLinecap="round" strokeDasharray={2 * Math.PI * 60}
                 strokeDashoffset={2 * Math.PI * 60 * (1 - Math.min(1, calRatio))}
-                style={{ transition: 'stroke-dashoffset .8s var(--ease)' }}
+                style={{ transition: 'stroke-dashoffset .7s var(--ease)' }}
               />
               <defs>
                 <linearGradient id="nutri-grad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#ff5a1f" />
-                  <stop offset="100%" stopColor="rgba(255,90,31,.55)" />
+                  <stop offset="0%" stopColor="var(--accent)" />
+                  <stop offset="100%" stopColor="var(--accent)" />
                 </linearGradient>
               </defs>
             </svg>
@@ -307,12 +306,12 @@ export function Nutrition() {
               <span className="meal-emoji">{MEAL_ICONS[type]}</span>
               <div className="grow">
                 <b>{MEAL_LABELS[type]}</b>
-                <span>{items.length ? `${items.length} item${items.length > 1 ? 's' : ''} · ${formatNumber(group?.calories || 0)} kcal` : 'Nothing logged yet'}</span>
+                <span>{items.length ? `${items.length} item${items.length > 1 ? 's' : ''} · ${formatNumber(group?.calories || 0)} kcal` : ''}</span>
               </div>
               <button className="meal-add" onClick={() => openAdd(type)} aria-label={`Add to ${MEAL_LABELS[type]}`}><Plus size={15} /></button>
             </div>
             {items.length === 0 ? (
-              <div className="meal-empty">A clean slate. Add something when you're ready.</div>
+              <div className="meal-empty">Nothing logged yet — tap the plus to add food.</div>
             ) : items.map(item => (
               <button key={item.id} className="meal-item" style={{ width: '100%', textAlign: 'left' }} onClick={() => openEdit(item)}>
                 <span className="food-dot" />
@@ -327,11 +326,11 @@ export function Nutrition() {
         );
       })}
 
-      <SectionHead title="The week at a glance" />
+      <SectionHead title="This week" />
       <div className="card activity-card">
         <div className="row-between mb-14">
           <div>
-            <div className="card-title">CALORIES</div>
+            <div className="card-title">Calories</div>
             <div className="card-value" style={{ fontSize: 22 }}>{formatNumber(week?.average?.calories || 0)}<span className="small faint" style={{ fontFamily: 'var(--font-sans)', fontWeight: 500 }}> avg / day</span></div>
           </div>
           <span className="pill pill-muted">{week?.loggedDays || 0}/7 logged</span>
@@ -350,9 +349,9 @@ export function Nutrition() {
             { label: 'Carbs', value: week?.average?.carbs || 0, color: 'var(--amber)' },
             { label: 'Fat', value: week?.average?.fat || 0, color: 'var(--rose)' },
           ].map(m => (
-            <div key={m.label} style={{ textAlign: 'center', padding: '9px 4px', borderRadius: 11, background: 'rgba(255,255,255,.03)' }}>
+            <div key={m.label} style={{ textAlign: 'center', padding: '9px 4px', borderRadius: 10, background: 'var(--surface-2)' }}>
               <div className="num" style={{ fontSize: 17, color: m.color }}>{Math.round(m.value)}<span className="tiny faint" style={{ fontFamily: 'var(--font-sans)' }}>g</span></div>
-              <div className="tiny faint" style={{ textTransform: 'uppercase', letterSpacing: '.06em' }}>{m.label}</div>
+              <div className="tiny faint" style={{ marginTop: 2 }}>{m.label}</div>
             </div>
           ))}
         </div>

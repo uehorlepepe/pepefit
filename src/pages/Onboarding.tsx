@@ -119,7 +119,6 @@ export function Onboarding() {
 
       {step === 0 && (
         <div className="ob-step">
-          <span className="eyebrow">Let's get personal</span>
           <h1>Tell us about<br />the basics.</h1>
           <p className="lead">We use this to estimate your energy needs. You can change any of it later.</p>
           <div className="ob-body">
@@ -158,7 +157,6 @@ export function Onboarding() {
 
       {step === 1 && (
         <div className="ob-step">
-          <span className="eyebrow">Direction</span>
           <h1>What are you<br />working toward?</h1>
           <p className="lead">Your focus shapes your calorie targets, workout suggestions and recipe picks.</p>
           <div className="ob-body" style={{ gap: 9 }}>
@@ -186,7 +184,6 @@ export function Onboarding() {
 
       {step === 2 && (
         <div className="ob-step">
-          <span className="eyebrow">Training & fuel</span>
           <h1>Build your<br />weekly rhythm.</h1>
           <p className="lead">Consistency beats intensity. Pick a frequency you can genuinely keep.</p>
           <div className="ob-body">
@@ -223,7 +220,6 @@ export function Onboarding() {
 
       {step === 3 && targets && (
         <div className="ob-step">
-          <span className="eyebrow">Your daily numbers</span>
           <h1>Set your<br />targets.</h1>
           <p className="lead">A starting point based on your details and focus. Adjust anything — nothing here is permanent.</p>
           <div className="ob-body">
@@ -277,11 +273,10 @@ export function Onboarding() {
 
       {step === 4 && (
         <div className="ob-done">
-          <div className="badge-big"><Dumbbell size={40} /></div>
-          <span className="eyebrow">Ready to move</span>
-          <h1 style={{ marginTop: 10 }}>You're set,<br />{form.name.split(' ')[0]}.</h1>
+          <div className="badge-big"><Dumbbell size={38} /></div>
+          <h1>You're set,<br />{form.name.split(' ')[0]}.</h1>
           <p className="auth-sub" style={{ textAlign: 'center' }}>
-            Your dashboard is ready. Log a meal, start a session, or scan your fridge — every small action counts.
+            Your dashboard is ready when you are. Log a meal, start a session, or scan the fridge.
           </p>
           <div className="row mt-24" style={{ gap: 10 }}>
             <button className="btn btn-primary btn-lg" onClick={() => navigate('/home', { replace: true })}>Enter Pepefit <ArrowRight size={16} /></button>

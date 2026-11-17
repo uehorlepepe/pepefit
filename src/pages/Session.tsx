@@ -229,15 +229,15 @@ export function SessionPage() {
       <div className="card" style={{ background: 'var(--surface)' }}>
         <div className="row-between">
           <div>
-            <div className="eyebrow">{active ? 'Session live' : 'Session summary'}</div>
+            <div className="card-title">{active ? 'In progress' : 'Summary'}</div>
             <div className="num" style={{ fontSize: 26, marginTop: 5 }}>{formatVolume(totalVolume)}<span className="small faint" style={{ fontFamily: 'var(--font-sans)', fontWeight: 500, marginLeft: 6 }}>volume</span></div>
           </div>
           {active && <span className="pill pill-volt"><span className="live-dot" style={{ width: 5, height: 5 }} /> Recording</span>}
         </div>
         <div className="grid-3 mt-14">
-          <div><div className="num" style={{ fontSize: 18 }}>{session.totalSets}</div><div className="tiny faint" style={{ textTransform: 'uppercase', letterSpacing: '.07em' }}>Sets</div></div>
-          <div><div className="num" style={{ fontSize: 18 }}>{formatDuration(duration)}</div><div className="tiny faint" style={{ textTransform: 'uppercase', letterSpacing: '.07em' }}>Duration</div></div>
-          <div><div className="num" style={{ fontSize: 18 }}>{session.exercises.length}</div><div className="tiny faint" style={{ textTransform: 'uppercase', letterSpacing: '.07em' }}>Exercises</div></div>
+          <div><div className="num" style={{ fontSize: 19 }}>{session.totalSets}</div><div className="tiny faint">Sets</div></div>
+          <div><div className="num" style={{ fontSize: 19 }}>{formatDuration(duration)}</div><div className="tiny faint">Duration</div></div>
+          <div><div className="num" style={{ fontSize: 19 }}>{session.exercises.length}</div><div className="tiny faint">Exercises</div></div>
         </div>
       </div>
 
@@ -302,7 +302,7 @@ export function SessionPage() {
                   <td><input className="set-input" type="number" inputMode="decimal" placeholder="0" value={draft[ex.exerciseId]?.weight ?? ''} onChange={e => setDraftValue(ex.exerciseId, 'weight', e.target.value)} /></td>
                   <td><input className="set-input" type="number" inputMode="numeric" placeholder="reps" value={draft[ex.exerciseId]?.reps ?? ''} onChange={e => setDraftValue(ex.exerciseId, 'reps', e.target.value)} onKeyDown={e => { if (e.key === 'Enter') logSet(ex); }} /></td>
                   <td>
-                    <button className="set-check" onClick={() => logSet(ex)} disabled={busy === `log-${ex.exerciseId}`} aria-label="Log set" style={{ borderColor: 'rgba(255,90,31,.35)', color: 'var(--accent)' }}>
+                    <button className="set-check" onClick={() => logSet(ex)} disabled={busy === `log-${ex.exerciseId}`} aria-label="Log set" style={{ borderColor: 'color-mix(in srgb, var(--accent) 40%, transparent)', color: 'var(--accent)' }}>
                       {busy === `log-${ex.exerciseId}` ? <span className="spinner" style={{ width: 12, height: 12 }} /> : <Plus size={15} strokeWidth={2.5} />}
                     </button>
                   </td>
@@ -333,8 +333,8 @@ export function SessionPage() {
               {FEELINGS.map((f, i) => (
                 <button key={i} onClick={() => setFeeling(i + 1)} style={{
                   width: 34, height: 34, borderRadius: 10, fontSize: 15,
-                  background: feeling === i + 1 ? 'var(--volt-dim)' : 'rgba(255,255,255,.04)',
-                  border: `1px solid ${feeling === i + 1 ? 'rgba(255,90,31,.45)' : 'var(--line)'}`, transition: '.2s',
+                  background: feeling === i + 1 ? 'var(--accent-dim)' : 'var(--tint)',
+                  border: `1px solid ${feeling === i + 1 ? 'color-mix(in srgb, var(--accent) 45%, transparent)' : 'var(--line)'}`, transition: '.18s',
                 }} aria-label={`Energy ${i + 1}`}>{f}</button>
               ))}
             </div>
@@ -364,7 +364,7 @@ export function SessionPage() {
             <div className="tiny faint" style={{ display: 'flex', alignItems: 'center', gap: 4 }}><Timer size={10} /> Rest</div>
             <div className="rt-bar"><i style={{ width: `${(remainingRest / restTotal) * 100}%` }} /></div>
           </div>
-          <button className="btn btn-sm" style={{ height: 32, padding: '0 10px', background: 'var(--volt-dim)', color: 'var(--volt)', fontSize: 10.5 }} onClick={() => { setRestTotal(t => t + 15); setRestEnd(e => (e || Date.now()) + 15000); }}>+15s</button>
+          <button className="btn btn-sm" style={{ height: 32, padding: '0 10px', background: 'var(--accent-dim)', color: 'var(--accent)', fontSize: 11 }} onClick={() => { setRestTotal(t => t + 15); setRestEnd(e => (e || Date.now()) + 15000); }}>+15s</button>
           <button className="btn-circle" style={{ width: 30, height: 30 }} onClick={() => setRestEnd(null)} aria-label="Skip rest"><X size={13} /></button>
         </div>
       )}
@@ -390,8 +390,8 @@ export function SessionPage() {
             {FEELINGS.map((f, i) => (
               <button key={i} onClick={() => setFeeling(i + 1)} style={{
                 flex: 1, height: 42, borderRadius: 12, fontSize: 18,
-                background: feeling === i + 1 ? 'var(--volt-dim)' : 'rgba(255,255,255,.04)',
-                border: `1px solid ${feeling === i + 1 ? 'rgba(255,90,31,.45)' : 'var(--line)'}`,
+                background: feeling === i + 1 ? 'var(--accent-dim)' : 'var(--tint)',
+                border: `1px solid ${feeling === i + 1 ? 'color-mix(in srgb, var(--accent) 45%, transparent)' : 'var(--line)'}`,
               }} aria-label={`Energy ${i + 1}`}>{f}</button>
             ))}
           </div>

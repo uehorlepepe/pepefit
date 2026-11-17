@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { ArrowRight, Eye, EyeOff, Play, Sparkles } from 'lucide-react';
+import { ArrowRight, Eye, EyeOff, Play } from 'lucide-react';
 import { AuthFrame } from './AuthFrame';
 import { useAuth } from '../../context/AuthContext';
 import { useUI } from '../../context/UIContext';
@@ -50,8 +50,8 @@ export function Login() {
 
   return (
     <AuthFrame
-      title={<>Train. Fuel.<br /><em>Evolve.</em></>}
-      subtitle="One place for your training, nutrition and the progress that comes with it."
+      title={<>Welcome<br /><em>back.</em></>}
+      subtitle="Sign in to pick up where you left off — your training, food and progress are all here."
       footer={<>New to Pepefit? <Link to="/signup">Create an account</Link></>}
     >
       <form className="auth-form" onSubmit={submit} noValidate>
@@ -77,14 +77,14 @@ export function Login() {
         </button>
       </form>
 
-      <div className="auth-divider">or explore the demo</div>
+      <div className="auth-divider">or try it first</div>
       <button type="button" className="demo-card" onClick={demo} disabled={!!loading}>
-        <span className="icon-box volt"><Sparkles size={17} /></span>
+        <span className="icon-box volt"><Play size={15} /></span>
         <span className="grow">
-          <b style={{ fontSize: 12.5, display: 'block' }}>Alex's demo account</b>
-          <span className="tiny faint">6 weeks of workouts, meals & progress</span>
+          <b style={{ fontSize: 13, display: 'block' }}>Look around the demo</b>
+          <span className="tiny faint">Six weeks of sample workouts and meals</span>
         </span>
-        {loading === 'demo' ? <span className="spinner" style={{ color: 'var(--text)' }} /> : <Play size={15} style={{ color: 'var(--volt)' }} />}
+        {loading === 'demo' ? <span className="spinner" /> : <ArrowRight size={15} className="faint" />}
       </button>
     </AuthFrame>
   );

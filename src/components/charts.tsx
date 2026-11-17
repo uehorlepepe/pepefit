@@ -50,7 +50,7 @@ function smoothPath(pts: { x: number; y: number }[]) {
   return d;
 }
 
-export function TrendChart({ data, color = 'var(--volt)', height = 150, suffix = '', unit = '', showArea = true, formatValue, showLast = true, grid = true }: {
+export function TrendChart({ data, color = 'var(--accent)', height = 150, suffix = '', unit = '', showArea = true, formatValue, showLast = true, grid = true }: {
   data: ChartPoint[]; color?: string; height?: number; suffix?: string; unit?: string;
   showArea?: boolean; formatValue?: (v: number) => string; showLast?: boolean; grid?: boolean;
 }) {
@@ -136,7 +136,7 @@ export function TrendChart({ data, color = 'var(--volt)', height = 150, suffix =
   );
 }
 
-export function Sparkline({ values, color = 'var(--volt)', width = 90, height = 30 }: { values: number[]; color?: string; width?: number; height?: number }) {
+export function Sparkline({ values, color = 'var(--accent)', width = 90, height = 30 }: { values: number[]; color?: string; width?: number; height?: number }) {
   const min = Math.min(...values);
   const max = Math.max(...values);
   const span = max - min || 1;
@@ -186,7 +186,7 @@ export function DonutRing({ segments, size = 110, stroke = 12, children }: {
   return (
     <div className="ring-wrap" style={{ width: size, height: size }}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transform: 'rotate(-90deg)' }}>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="rgba(255,255,255,.06)" strokeWidth={stroke} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--ring-track)" strokeWidth={stroke} />
         {segments.map((s, i) => {
           const len = (s.value / total) * c;
           const el = (

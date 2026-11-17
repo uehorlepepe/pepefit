@@ -17,7 +17,7 @@ Pepefit is a mobile-first fitness app for training, nutrition and progress track
 - React 19 + TypeScript + Vite
 - Express 5 + SQLite (`node:sqlite`)
 - JWT auth with bcrypt password hashing
-- Inter + JetBrains Mono, OLED-black design system with orange accents
+- Fraunces + DM Sans, a warm paper-and-ink design system with clay accents (light and dark themes)
 
 ## Getting started
 

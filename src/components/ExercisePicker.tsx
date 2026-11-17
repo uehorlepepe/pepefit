@@ -114,7 +114,7 @@ export function ExerciseDetail({ exerciseId, onClose, onAdd }: { exerciseId: num
               </div>
               <TrendChart
                 data={data.history.map((h: any) => ({ label: formatDate(h.date, { month: 'short', day: 'numeric' }), value: h.topWeight }))}
-                color="var(--volt)" height={120} unit=" kg"
+                color="var(--accent)" height={120} unit=" kg"
               />
             </div>
           )}

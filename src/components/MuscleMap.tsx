@@ -138,10 +138,10 @@ export function MuscleMap({ muscles, initialView = 'front' }: { muscles: MuscleD
 
       <div className="map-legend">
         {[
-          ['Untrained', 'rgba(255,255,255,.1)'],
-          ['Light', 'rgba(255,90,31,.25)'],
-          ['Moderate', 'rgba(255,90,31,.55)'],
-          ['High', '#ff5a1f'],
+          ['Untrained', 'var(--ring-track)'],
+          ['Light', 'color-mix(in srgb, var(--accent) 28%, var(--map-muscle))'],
+          ['Moderate', 'color-mix(in srgb, var(--accent) 58%, var(--map-muscle))'],
+          ['High', 'var(--accent)'],
         ].map(([label, color]) => (
           <span className="lg" key={label}><i className="sw" style={{ background: color }} />{label}</span>
         ))}

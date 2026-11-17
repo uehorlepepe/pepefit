@@ -171,7 +171,7 @@ export function Profile() {
   };
 
   const targetSummary = t ? [
-    { label: 'Calories', value: formatNumber(t.calories), unit: 'kcal', color: 'var(--volt)' },
+    { label: 'Calories', value: formatNumber(t.calories), unit: 'kcal', color: 'var(--accent)' },
     { label: 'Protein', value: t.protein, unit: 'g', color: 'var(--sky)' },
     { label: 'Carbs', value: t.carbs, unit: 'g', color: 'var(--amber)' },
     { label: 'Fat', value: t.fat, unit: 'g', color: 'var(--rose)' },
@@ -181,8 +181,7 @@ export function Profile() {
     <div className="page">
       <div className="page-head" style={{ marginBottom: 16 }}>
         <div>
-          <span className="eyebrow">Your space</span>
-          <h1>Profile<span style={{ color: 'var(--volt)' }}>.</span></h1>
+          <h1>Profile</h1>
         </div>
         <button className="btn-circle" style={{ marginTop: 4 }} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label="Toggle theme">
           {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
@@ -211,8 +210,8 @@ export function Profile() {
 
       {weights.length > 1 && (
         <div className="card mt-10" style={{ padding: '8px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span className="card-title" style={{ flexShrink: 0 }}>30D</span>
-          <div className="grow"><Sparkline values={weights.map(w => w.weight)} color="var(--volt)" width={200} height={34} /></div>
+          <span className="card-title" style={{ flexShrink: 0 }}>30 days</span>
+          <div className="grow"><Sparkline values={weights.map(w => w.weight)} color="var(--accent)" width={200} height={34} /></div>
           <button className="link" style={{ fontSize: 11, color: 'var(--muted)' }} onClick={() => navigate('/progress')}>Details <ChevronRight size={11} /></button>
         </div>
       )}
@@ -288,7 +287,7 @@ export function Profile() {
         <div className="card">
           <div className="settings-row">
             <span className="icon-box" style={{ width: 34, height: 34, borderRadius: 10 }}>{theme === 'dark' ? <Moon size={15} /> : <Sun size={15} />}</span>
-            <div className="sr-body"><b>Appearance</b><span>{theme === 'dark' ? 'Dark — easy on the eyes' : 'Light — bright and clean'}</span></div>
+            <div className="sr-body"><b>Appearance</b><span>{theme === 'dark' ? 'Dark — low light' : 'Light — warm paper'}</span></div>
             <div className="segmented tiny" style={{ width: 118 }}>
               <button className={theme === 'dark' ? 'active' : ''} onClick={() => setTheme('dark')}>Dark</button>
               <button className={theme === 'light' ? 'active' : ''} onClick={() => setTheme('light')}>Light</button>
@@ -310,7 +309,7 @@ export function Profile() {
       </div>
 
       <div className="center mt-24 tiny faint" style={{ lineHeight: 1.7, paddingBottom: 10 }}>
-        Pepefit · Train. Fuel. Evolve.<br />
+        Pepefit<br />
         {formatNumber(summary?.totalVolume || 0)} kg lifted all time
       </div>
 
@@ -379,7 +378,7 @@ export function Profile() {
               <button className="chip" style={{ height: 28, fontSize: 10.5 }} onClick={suggestTargets}><Sparkles size={11} /> Suggest</button>
             </div>
             {([
-              { key: 'calories', label: 'Calories', suffix: 'kcal', color: 'var(--volt)' },
+              { key: 'calories', label: 'Calories', suffix: 'kcal', color: 'var(--accent)' },
               { key: 'protein', label: 'Protein', suffix: 'g', color: 'var(--sky)' },
               { key: 'carbs', label: 'Carbs', suffix: 'g', color: 'var(--amber)' },
               { key: 'fat', label: 'Fat', suffix: 'g', color: 'var(--rose)' },

@@ -14,7 +14,7 @@ interface UIContextValue {
 const UIContext = createContext<UIContextValue | null>(null);
 
 export function UIProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<'dark' | 'light'>(() => (localStorage.getItem('pepefit.theme') as 'dark' | 'light') || 'dark');
+  const [theme, setThemeState] = useState<'dark' | 'light'>(() => (localStorage.getItem('pepefit.theme') as 'dark' | 'light') || 'light');
   const [toasts, setToasts] = useState<Toast[]>([]);
   const idRef = useRef(0);
 
@@ -23,7 +23,7 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.style.colorScheme = theme;
     localStorage.setItem('pepefit.theme', theme);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'dark' ? '#000000' : '#F4F4F5');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#1a1917' : '#f4f1ea');
   }, [theme]);
 
   const dismissToast = useCallback((id: number) => {

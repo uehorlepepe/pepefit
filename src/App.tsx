@@ -20,7 +20,7 @@ function LoadingScreen() {
   return (
     <div className="loading-screen">
       <div className="loading-logo"><BrandGlyph /></div>
-      <span className="tiny faint">Loading Pepefit…</span>
+      <span className="tiny faint">Loading…</span>
     </div>
   );
 }

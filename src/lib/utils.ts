@@ -75,7 +75,7 @@ export function addDays(date: string, delta: number) {
 }
 
 export function shortDay(date: string) {
-  return parseLocalDate(date).toLocaleDateString(undefined, { weekday: 'short' }).slice(0, 2);
+  return parseLocalDate(date).toLocaleDateString(undefined, { weekday: 'short' });
 }
 
 export function formatDate(date: string, opts: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' }) {

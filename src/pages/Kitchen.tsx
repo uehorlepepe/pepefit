@@ -208,8 +208,7 @@ export function Kitchen() {
     <div className="page">
       <div className="page-head">
         <div>
-          <span className="eyebrow">Cook what you have</span>
-          <h1>AI Kitchen<span style={{ color: 'var(--volt)' }}>.</span></h1>
+          <h1>Kitchen</h1>
         </div>
         <span className="icon-box volt" style={{ marginTop: 4 }}><Sparkles size={17} /></span>
       </div>
@@ -229,7 +228,7 @@ export function Kitchen() {
               {preview && <img src={preview} alt="Fridge being scanned" />}
               <div className="scan-line" />
               <div className="scan-overlay">
-                <div className="eyebrow" style={{ color: 'var(--volt)' }}>Analysing</div>
+                <div className="eyebrow" style={{ color: '#f2a184' }}>One moment</div>
                 <b style={{ fontSize: 17, color: '#fff', marginTop: 4 }}>Reading your fridge…</b>
                 <div className="scan-steps">
                   {['Detecting ingredients', 'Checking your remaining macros', 'Matching recipes you can cook'].map((s, i) => (
@@ -301,7 +300,7 @@ export function Kitchen() {
                 <div className="stack" style={{ gap: 10 }}>
                   {scan.recipes.map(r => (
                     <button key={r.id} className="card recipe-card card-press" style={{ width: '100%', textAlign: 'left' }} onClick={() => setActive(r)}>
-                      <span className="recipe-thumb" style={{ background: r.gradient }}>
+                      <span className="recipe-thumb">
                         {r.emoji}
                         <span className="match-badge">{r.matchPercent}% match</span>
                       </span>
@@ -328,9 +327,9 @@ export function Kitchen() {
               <div className="kitchen-hero">
                 <div className="hero-mesh" />
                 <div className="row-between" style={{ position: 'relative', zIndex: 2 }}>
-                  <span className="eyebrow">AI KITCHEN</span>
-                  <span className="pill" style={{ background: 'rgba(255,255,255,.08)', color: 'rgba(255,255,255,.8)', fontSize: 9 }}>
-                    <Sparkles size={10} /> {status?.mode === 'ai' ? 'Vision AI ready' : 'Demo vision'}
+                  <span className="eyebrow">Scan your fridge</span>
+                  <span className="pill pill-muted">
+                    <Sparkles size={10} /> {status?.mode === 'ai' ? 'Vision ready' : 'Demo vision'}
                   </span>
                 </div>
                 <h2>What's in<br />your fridge?</h2>
@@ -342,13 +341,13 @@ export function Kitchen() {
                     <span>Use your camera</span>
                   </button>
                   <button className="upload-tile" style={{ flex: 1 }} onClick={() => fileRef.current?.click()}>
-                    <span className="up-ico" style={{ background: 'rgba(255,255,255,.1)', color: '#fff' }}><Upload size={21} /></span>
+                    <span className="up-ico" style={{ background: 'var(--surface-3)', color: 'var(--text)' }}><Upload size={21} /></span>
                     <b>Upload</b>
                     <span>JPG, PNG, WEBP</span>
                   </button>
                 </div>
                 {status?.mode === 'demo' && (
-                  <div className="row mt-14" style={{ gap: 6, position: 'relative', zIndex: 2, color: 'rgba(244,247,238,.45)' }}>
+                  <div className="row mt-14" style={{ gap: 6, position: 'relative', zIndex: 2, color: 'var(--muted)' }}>
                     <Info size={12} style={{ flexShrink: 0 }} />
                     <span style={{ fontSize: 9.5, lineHeight: 1.5 }}>Demo mode infers ingredients locally from the image. Set OPENAI_API_KEY to enable real vision analysis.</span>
                   </div>
@@ -389,7 +388,7 @@ export function Kitchen() {
                   <div className="scroll-x">
                     {saved.slice(0, 4).map(r => (
                       <button key={r.id} className="card" style={{ width: 166, padding: 12, textAlign: 'left', flexShrink: 0 }} onClick={() => setActive(r)}>
-                        <span className="recipe-thumb" style={{ width: '100%', height: 84, marginBottom: 9, background: r.gradient, fontSize: 34 }}>{r.emoji}</span>
+                        <span className="recipe-thumb" style={{ width: '100%', height: 84, marginBottom: 9, fontSize: 34 }}>{r.emoji}</span>
                         <b style={{ fontSize: 11.5, display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.name}</b>
                         <div className="tiny faint mt-6">{r.protein}g protein · {r.totalMin} min</div>
                       </button>
@@ -415,7 +414,7 @@ export function Kitchen() {
             <div className="stack" style={{ gap: 10 }}>
               {saved.map(r => (
                 <button key={r.id} className="card recipe-card card-press" style={{ width: '100%', textAlign: 'left' }} onClick={() => setActive(r)}>
-                  <span className="recipe-thumb" style={{ background: r.gradient }}>{r.emoji}</span>
+                  <span className="recipe-thumb">{r.emoji}</span>
                   <div className="recipe-card-main">
                     <div className="row-between" style={{ gap: 6 }}>
                       <b>{r.name}</b>

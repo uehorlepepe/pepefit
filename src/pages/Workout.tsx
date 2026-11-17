@@ -81,8 +81,7 @@ export function Workout() {
     <div className="page">
       <div className="page-head">
         <div>
-          <span className="eyebrow">Train with intent</span>
-          <h1>Workout<span style={{ color: 'var(--volt)' }}>.</span></h1>
+          <h1>Workout</h1>
         </div>
         <div className="row" style={{ gap: 7, marginTop: 3 }}>
           <button className="btn-circle" onClick={() => setHistoryOpen(true)} aria-label="Workout history"><History size={16} /></button>
@@ -104,14 +103,14 @@ export function Workout() {
                 <b>{inProgress.name} in progress</b>
                 <span>Started {timeAgo(inProgress.startedAt)} · tap to resume</span>
               </span>
-              <ArrowRight size={16} style={{ color: 'var(--volt)' }} />
+              <ArrowRight size={16} style={{ color: 'var(--accent)' }} />
             </button>
           )}
 
           <div className="card muscle-hero">
             <div className="muscle-hero-top">
               <div>
-                <div className="card-title"><Sparkles size={13} style={{ color: 'var(--volt)' }} /> MUSCLE MAP</div>
+                <div className="card-title"><Sparkles size={13} style={{ color: 'var(--accent)' }} /> Muscle map</div>
                 <div className="tiny faint" style={{ marginTop: 4 }}>
                   {muscles?.totalSets || 0} working sets · {muscles?.lastWorkout ? `last ${timeAgo(muscles.lastWorkout)}` : 'no sessions yet'}
                 </div>

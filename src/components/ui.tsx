@@ -75,7 +75,7 @@ export function Sheet({ open, onClose, title, children, footer, center = false, 
   );
 }
 
-export function Ring({ value, size = 160, stroke = 11, color = 'var(--volt)', track, children, glow = true }: {
+export function Ring({ value, size = 160, stroke = 11, color = 'var(--accent)', track, children, glow = false }: {
   value: number; size?: number; stroke?: number; color?: string; track?: string;
   children?: React.ReactNode; glow?: boolean;
 }) {
@@ -93,7 +93,7 @@ export function Ring({ value, size = 160, stroke = 11, color = 'var(--volt)', tr
           </linearGradient>
           {glow && <filter id={`glow-${id}`} x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>}
         </defs>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={track || 'rgba(255,255,255,.075)'} strokeWidth={stroke} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={track || 'var(--ring-track)'} strokeWidth={stroke} />
         <circle
           cx={size / 2} cy={size / 2} r={r} fill="none" stroke={`url(#ring-${id})`}
           strokeWidth={stroke} strokeLinecap="round"
@@ -180,8 +180,8 @@ export function ErrorNote({ message }: { message: string }) {
 export function Stat({ value, label, sub }: { value: React.ReactNode; label: string; sub?: string }) {
   return (
     <div>
-      <div className="num" style={{ fontSize: 19 }}>{value}</div>
-      <div className="tiny faint" style={{ textTransform: 'uppercase', letterSpacing: '.08em', marginTop: 2 }}>{label}</div>
+      <div className="num" style={{ fontSize: 20 }}>{value}</div>
+      <div className="tiny faint" style={{ marginTop: 2 }}>{label}</div>
       {sub && <div className="tiny faint mt-6">{sub}</div>}
     </div>
   );

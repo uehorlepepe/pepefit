@@ -64,7 +64,7 @@ export function Home() {
           <div className="home-meta">
             {dateLabel}
             <span className="dot-sep" />
-            {data.streak}D STREAK
+            <span>{data.streak} day streak</span>
           </div>
           <h1 className="greet">{greeting()}, {firstName}</h1>
         </div>
@@ -73,14 +73,14 @@ export function Home() {
 
       <section className="card energy-card">
         <div className="card-head">
-          <span className="card-title"><Flame size={12} style={{ color: 'var(--accent)' }} /> Today's energy</span>
+          <span className="card-title"><Flame size={13} style={{ color: 'var(--accent)' }} /> Food today</span>
           <span className={`pill ${over ? 'pill-accent' : 'pill-muted'}`}>
             {over ? `${formatNumber(Math.abs(remaining))} over` : `${formatNumber(remaining)} left`}
           </span>
         </div>
 
         <div className="energy-body">
-          <Ring value={calRatio} size={146} stroke={10} color="var(--accent)" track="rgba(255,255,255,.06)">
+          <Ring value={calRatio} size={146} stroke={10} color="var(--accent)">
             <span className="big">{formatNumber(eaten)}</span>
             <span className="lbl">of {formatNumber(targetCalories)} kcal</span>
             <span className="sub">{Math.round(calRatio * 100)}%</span>
@@ -118,8 +118,8 @@ export function Home() {
 
       <section className="card workout-hero mt-14">
         <div className="card-head">
-          <span className="card-title"><Dumbbell size={12} style={{ color: 'var(--accent)' }} /> {doneToday ? 'Today’s session' : data.activeSession ? 'In progress' : 'Next session'}</span>
-          {!doneToday && !data.activeSession && <span className="pill pill-accent">Planned</span>}
+          <span className="card-title"><Dumbbell size={13} style={{ color: 'var(--accent)' }} /> {doneToday ? 'Today’s session' : data.activeSession ? 'In progress' : 'Next session'}</span>
+          {!doneToday && !data.activeSession && <span className="pill pill-muted">Planned</span>}
         </div>
 
         <h2 className="workout-title">
@@ -192,8 +192,8 @@ export function Home() {
           suffix=" kcal"
         />
         <div className="week-foot">
-          <span>7-day energy vs target</span>
-          <span>{activeDays} active days</span>
+          <span>Calories vs target</span>
+          <span>{activeDays} active {activeDays === 1 ? 'day' : 'days'}</span>
         </div>
       </section>
     </div>

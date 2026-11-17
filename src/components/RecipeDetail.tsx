@@ -109,29 +109,24 @@ export function RecipeDetail({ recipe, open, onClose, onChanged, onLogged }: {
         </div>
       }
     >
-      <div className="recipe-hero" style={{ background: recipe.gradient }}>
-        <span className="rh-emoji">{recipe.emoji}</span>
-        <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', gap: 8, zIndex: 3 }}>
-          <button
-            className="btn-circle" onClick={handleSave} disabled={busy === 'save'}
-            style={{ background: 'rgba(6,8,4,.42)', borderColor: 'rgba(255,255,255,.18)', color: saved ? 'var(--rose)' : '#fff', backdropFilter: 'blur(8px)' }}
-            aria-label={saved ? 'Remove from favourites' : 'Save recipe'}
-          >
-            <Heart size={16} fill={saved ? 'var(--rose)' : 'none'} />
+      <div className="recipe-hero">
+        <div className="rh-actions">
+          <button className="btn-circle" onClick={handleSave} disabled={busy === 'save'} aria-label={saved ? 'Remove from favourites' : 'Save recipe'}>
+            <Heart size={16} fill={saved ? 'var(--rose)' : 'none'} color={saved ? 'var(--rose)' : 'currentColor'} />
           </button>
-          <button className="btn-circle" onClick={onClose} style={{ background: 'rgba(6,8,4,.42)', borderColor: 'rgba(255,255,255,.18)', color: '#fff', backdropFilter: 'blur(8px)' }} aria-label="Close recipe">
+          <button className="btn-circle" onClick={onClose} aria-label="Close recipe">
             <X size={16} />
           </button>
         </div>
         <div className="rh-content">
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 8 }}>
+          <div className="rh-pills">
+            <span className="pill">{recipe.cuisine}</span>
             {recipe.highProtein && <span className="pill pill-sky"><Sparkles size={10} /> High protein</span>}
-            <span className="pill" style={{ background: 'rgba(0,0,0,.28)', color: 'rgba(255,255,255,.85)' }}>{recipe.cuisine}</span>
           </div>
           <h2>{recipe.name}</h2>
           <div className="rh-meta">
-            <span><Clock size={11} style={{ display: 'inline', verticalAlign: -1, marginRight: 3 }} />{recipe.totalMin} min</span>
-            <span><Flame size={11} style={{ display: 'inline', verticalAlign: -1, marginRight: 3 }} />{recipe.calories} kcal / serving</span>
+            <span><Clock size={12} style={{ display: 'inline', verticalAlign: -2, marginRight: 4 }} />{recipe.totalMin} min</span>
+            <span><Flame size={12} style={{ display: 'inline', verticalAlign: -2, marginRight: 4 }} />{recipe.calories} kcal / serving</span>
             <span>Serves {recipe.servings}</span>
           </div>
         </div>
