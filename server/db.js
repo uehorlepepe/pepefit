@@ -20,6 +20,7 @@ db.exec(`
     name TEXT NOT NULL,
     avatar_color TEXT DEFAULT 'volt',
     onboarded INTEGER DEFAULT 0,
+    is_admin INTEGER DEFAULT 0,
     created_at TEXT DEFAULT (datetime('now'))
   );
 
@@ -212,6 +213,12 @@ db.exec(`
   );
 
 `);
+
+// Older databases were created before the admin role existed.
+const userColumns = db.prepare('PRAGMA table_info(users)').all();
+if (!userColumns.some((column) => column.name === 'is_admin')) {
+  db.exec('ALTER TABLE users ADD COLUMN is_admin INTEGER DEFAULT 0');
+}
 
 export function tx(fn) {
   db.exec('BEGIN');

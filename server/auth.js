@@ -27,7 +27,7 @@ export function authMiddleware(req, res, next) {
   if (!token) return res.status(401).json({ error: 'Not signed in' });
   try {
     const payload = jwt.verify(token, SECRET);
-    const user = get('SELECT id, email, name, avatar_color, onboarded, created_at FROM users WHERE id = ?', payload.uid);
+    const user = get('SELECT id, email, name, avatar_color, onboarded, is_admin, created_at FROM users WHERE id = ?', payload.uid);
     if (!user) return res.status(401).json({ error: 'Account not found' });
     req.user = user;
     next();
@@ -45,6 +45,7 @@ export function publicUser(user) {
     name: user.name,
     avatarColor: user.avatar_color,
     onboarded: !!user.onboarded,
+    isAdmin: !!user.is_admin,
     createdAt: user.created_at,
     profile: profile ? {
       age: profile.age,

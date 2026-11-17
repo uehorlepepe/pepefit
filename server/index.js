@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'node:path';
 import fs from 'node:fs';
+import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { seedDatabase } from './seed.js';
 import { authRouter } from './routes/auth.js';
@@ -10,6 +11,7 @@ import { nutritionRouter } from './routes/nutrition.js';
 import { progressRouter } from './routes/progress.js';
 import { kitchenRouter } from './routes/kitchen.js';
 import { dashboardRouter } from './routes/dashboard.js';
+import { adminRouter } from './routes/admin.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
@@ -31,6 +33,7 @@ app.use('/api/nutrition', nutritionRouter);
 app.use('/api', progressRouter);
 app.use('/api', kitchenRouter);
 app.use('/api', dashboardRouter);
+app.use('/api/admin', adminRouter);
 
 app.use('/api', (_req, res) => res.status(404).json({ error: 'Endpoint not found.' }));
 
@@ -52,7 +55,22 @@ app.use((err, _req, res, _next) => {
 });
 
 const PORT = Number(process.env.PORT) || 4000;
-app.listen(PORT, () => {
+const HOST = process.env.HOST || '0.0.0.0';
+
+function networkAddresses() {
+  const addresses = [];
+  for (const list of Object.values(os.networkInterfaces())) {
+    for (const net of list || []) {
+      if (net.family === 'IPv4' && !net.internal) addresses.push(net.address);
+    }
+  }
+  return addresses;
+}
+
+app.listen(PORT, HOST, () => {
   console.log(`Pepefit API running on http://localhost:${PORT}`);
+  for (const address of networkAddresses()) {
+    console.log(`  on your phone (same Wi-Fi): http://${address}:${PORT}`);
+  }
   console.log(process.env.OPENAI_API_KEY ? 'AI Kitchen: vision model enabled' : 'AI Kitchen: demo vision mode (set OPENAI_API_KEY for real image analysis)');
 });

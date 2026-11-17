@@ -15,6 +15,7 @@ import { Nutrition } from './pages/Nutrition';
 import { Kitchen } from './pages/Kitchen';
 import { Profile } from './pages/Profile';
 import { Progress } from './pages/Progress';
+import { Admin } from './pages/Admin';
 
 function LoadingScreen() {
   return (
@@ -31,6 +32,12 @@ function RequireAuth() {
   if (loading) return <LoadingScreen />;
   if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />;
   if (!user.onboarded && location.pathname !== '/onboarding') return <Navigate to="/onboarding" replace />;
+  return <Outlet />;
+}
+
+function RequireAdmin() {
+  const { user } = useAuth();
+  if (!user?.isAdmin) return <Navigate to="/home" replace />;
   return <Outlet />;
 }
 
@@ -61,6 +68,9 @@ export function App() {
               <Route path="/kitchen" element={<Kitchen />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/progress" element={<Progress />} />
+              <Route element={<RequireAdmin />}>
+                <Route path="/admin" element={<Admin />} />
+              </Route>
             </Route>
           </Route>
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Award, ChevronRight, LogOut, Moon, Pencil, Settings, Shield, Sparkles, Sun,
+  Award, ChevronRight, LogOut, Moon, Pencil, Settings, Shield, ShieldCheck, Sparkles, Sun,
   Trash2, Trophy, UserRound, Utensils,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -299,6 +299,14 @@ export function Profile() {
             <div className="sr-body"><b>Account & security</b><span>Name, email and password</span></div>
             <ChevronRight size={14} className="faint" />
           </button>
+
+          {user.isAdmin && (
+            <button className="settings-row" onClick={() => navigate('/admin')}>
+              <span className="icon-box volt" style={{ width: 34, height: 34, borderRadius: 10 }}><ShieldCheck size={15} /></span>
+              <div className="sr-body"><b>Admin</b><span>Every account and its activity</span></div>
+              <ChevronRight size={14} className="faint" />
+            </button>
+          )}
 
           <button className="settings-row" onClick={handleLogout}>
             <span className="icon-box rose" style={{ width: 34, height: 34, borderRadius: 10 }}><LogOut size={15} /></span>

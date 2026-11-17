@@ -29,9 +29,29 @@ export interface User {
   name: string;
   avatarColor: string;
   onboarded: boolean;
+  isAdmin?: boolean;
   createdAt: string;
   profile: Profile | null;
   targets: Targets | null;
+}
+
+export interface AdminUserRow {
+  id: number;
+  name: string;
+  email: string;
+  createdAt: string;
+  isAdmin: boolean;
+  workouts: number;
+  sets: number;
+  meals: number;
+  mealDays: number;
+  lastWorkout: string | null;
+}
+
+export interface AdminOverview {
+  totals: { users: number; admins: number; workouts: number; sets: number; meals: number };
+  library: { exercises: number; foods: number; recipes: number };
+  users: AdminUserRow[];
 }
 
 export interface Exercise {

@@ -211,9 +211,26 @@ export function seedDemo() {
   });
 }
 
+export function seedAdmin() {
+  const email = 'admin@pepefit.app';
+  const existing = get('SELECT id FROM users WHERE email = ?', email);
+  if (existing) {
+    run('UPDATE users SET is_admin = 1 WHERE id = ?', existing.id);
+    return;
+  }
+  const password_hash = bcrypt.hashSync('admin12345', 10);
+  const userId = Number(run('INSERT INTO users (email, password_hash, name, avatar_color, onboarded, is_admin) VALUES (?, ?, ?, ?, 1, 1)',
+    email, password_hash, 'Pepefit Admin', 'volt').lastInsertRowid);
+  run(`INSERT INTO profiles (user_id, age, sex, height_cm, weight_kg, experience, goal, weekly_frequency, diet, restrictions, activity_level, unit_system)
+    VALUES (?, 32, 'male', 180, 78, 'advanced', 'strength', 4, ?, ?, 'moderate', 'metric')`,
+    userId, JSON.stringify(['High protein', 'Balanced']), JSON.stringify([]));
+  run('INSERT INTO targets (user_id, calories, protein, carbs, fat, fiber, sodium) VALUES (?, 2500, 180, 260, 75, 32, 2300)', userId);
+}
+
 export function seedDatabase() {
   seedStaticData();
   seedDemo();
+  seedAdmin();
 }
 
 if (process.argv[1] && process.argv[1].endsWith('seed.js')) {
